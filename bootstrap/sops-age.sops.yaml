@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: sops-age
+  namespace: flux-system
+stringData:
+  age.agekey: ENC[AES256_GCM,data:UFh1u4AuUbvlzv5zOOyrss3Eimi3NRvA7c/KdW6RQ5S9sjxsY1FD71HaPoL+wx5jSJ7OkY3Mqf55Auoj9sFEnnpr4U4KftbzyMg=,iv:j1Nc92KIsCKOuOXKzawTEo63zVX7DHOhBtj6wrNrzB0=,tag:iSRA1GBGiCFGeEGxbiiUjw==,type:str]
+sops:
+  age:
+    - recipient: age1dns8m4t5ee6hkxr4cuun7nj2hy0urjqnwyrhztc6qujcx7zq94dsyv5vpu
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBUU2ZONVlxYWhsM3RqN0xm
+        eVpXa0hOTHA5aXk2M3hJcVVBKzJBYktLblU0CkZ3QzB3VXUzNkYyOG5Wc0hOWXBi
+        NWdVdjZmN2g4b0E1R1kxUXBmcElRZGsKLS0tIHdhbFQ2WkF1TytqS01QazBrUDA0
+        M1RBTWhianZpRXVuQURtb0tsbHZTWGMKxxlEN0K7YkwURIrFlOPjBKMxd0TQrasa
+        meuqdUAYMtD1VEhwGZnxStMd4GDw2YRZGka+T5XvMNfTrBIlihVQqg==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-11-23T07:02:38Z"
+  mac: ENC[AES256_GCM,data:YuDV2ga7d2o4C7bWdyrOLOeVGe/1AtjIlw+Q0izldH8+2y6IzYmHbvtb0KtewStwFfuHindPGYU+MjwKqUgsEKxBN2NHG8MFOT0gonmdxj3HZTAsEpWW/3p+rSuHZm43uY4bDO5/AQnI1ioc+nBDNlIwFNMnLrmkrciccq5qNZE=,iv:fcwLp6l2/sOTlDAVhDJH9R3zO1PEpo3kPu1nRylArvc=,tag:TxGvCNq7RdE2/kWBHElziw==,type:str]
+  encrypted_regex: ^(data|stringData)$
+  mac_only_encrypted: true
+  version: 3.11.0
