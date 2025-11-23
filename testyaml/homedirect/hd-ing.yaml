@@ -1,0 +1,39 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hd-ing
+  annotations:
+#    nginx.ingress.kubernetes.io/rewrite-target: /
+    ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - host: hdsetting.janncot.duckdns.org
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: hdconfig-svc
+            port:
+              name: for-ui
+  - host: "*.hd.janncot.duckdns.org"      # FIXME: need *.*.broker.janncot.duckdns.org. But only support singel DNS lable....
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: hdbroker-svc
+            port:
+              name: for-external
+  - host: "*.agent.janncot.duckdns.org"         # For agent onboard. Production example: "agentID.genie.com/websocket"
+    http:
+      paths:
+      - path: /onboard
+        pathType: Prefix
+        backend:
+          service:
+            name: hdbroker-svc
+            port:
+              name: for-agent                  # non-ssl

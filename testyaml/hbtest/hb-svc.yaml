@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hb-svc
+spec:
+  selector:
+    app: homebridge
+  ports:
+    - name: for-ui
+      protocol: TCP
+      port: 8581
+    - name: for-b4e
+      protocol: TCP
+      port: 8788

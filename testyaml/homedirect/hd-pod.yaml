@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hdconfig-pod
+  labels:
+    app: hdconfig
+spec:
+  volumes:
+    - name: homedirect-pv-storage
+      persistentVolumeClaim:
+        claimName: nfs-pvc
+  containers:
+    - name: configurator-container
+      image: ferry133/hd_config:latest
+      env:
+        - name: ADMIN_USERNAME
+          value: "admin"
+        - name: ADMIN_PASSWORD
+          value: "admin"
+      ports:
+        - containerPort: 8085     #for-ui, ingress
+        - containerPort: 8087     #for-router
+        - containerPort: 8088     #for-broker
+      volumeMounts:
+        - mountPath: "/root/.homedirect"
+          name: homedirect-pv-storage
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hdrouter-pod
+  labels:
+    app: hdrouter
+spec:
+  containers:
+    - name: hdrouter-container
+      image: ferry133/hd_router:latest
+      ports:
+        - containerPort: 8787     #for-b4agent
+        - containerPort: 8788     #for-b4ext
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hdbroker-pod
+  labels:
+    app: hdbroker
+spec:
+  containers:
+    - name: hdbroker-container
+      image: ferry133/hd_broker:latest
+      ports:
+        - containerPort: 8887     # for-agent, ingress
+        - containerPort: 8888     # for-external, ingress
